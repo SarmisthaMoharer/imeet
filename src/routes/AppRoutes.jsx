@@ -1,24 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
-import EventDetails from "./pages/EventDetails";
+import EventDetails from "./pages/EventDetails"; // Make sure this component exists
 import Register from "./pages/Register";
-import Navbar from "./components/Navbar";
 
-function App() {
+const AppRoutes = () => {
   return (
     <Router>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/events" element={<Events />} />
-        <Route path="/events/:id" element={<EventDetails />} />
-        <Route path="/register/:id" element={<Register />} />
+        <Route path="/event/:id" element={<EventDetails />} /> {/* Add this route */}
+        <Route path="/register" element={<Register />} />
       </Routes>
     </Router>
   );
-}
+};
 
-export default App;
-
-
+export default AppRoutes;
