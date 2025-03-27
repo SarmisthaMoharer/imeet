@@ -1,6 +1,7 @@
 import { useParams,useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import eventData from "../data/eventfulldetails.json";
+import eventData from "../data/eventfulldetails.json?import";
+
 
 const EventDetails = () => {
   const { id } = useParams();

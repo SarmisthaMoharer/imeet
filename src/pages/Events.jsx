@@ -1,8 +1,7 @@
-
-
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import eventData from "../data/eventfulldetails.json";
+import eventData from "../data/eventfulldetails.json?import";
+
 
 const Events = ({ isHomePage = false }) => {
   const [categories, setCategories] = useState([]);
