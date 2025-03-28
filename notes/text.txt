@@ -1,0 +1,78 @@
+Participants( 
+    userID INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    PasswordHash VARCHAR(255) NOT NULL,
+    RollNo INT UNIQUE NOT NULL,
+    Department VARCHAR(100), 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+)
+
+Team Event(
+    TeamID INT PRIMARY KEY AUTO_INCREMENT,
+    RollNo INT NOT NULL,  -- Foreign Key 
+    TeamName VARCHAR(10) NOT NULL, 
+    ParticipantName VARCHAR(255) NOT NULL,
+    PhoneNumber VARCHAR(15) CHECK (PhoneNumber REGEXP '^[0-9]+$'),
+    Department VARCHAR(100),
+    Email VARCHAR(255) UNIQUE,
+    TeamLead BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (RollNo) REFERENCESParticipants(RollNo) ON DELETE CASCADE
+)
+
+Code Conquest
+    Roll No. (Foreign key relation with Participants table)
+    Participant Name
+    Phone number
+    Team Name
+    Department
+    Email
+Admins
+
+    name
+    password
+    co-ordinating event
+
+
+Participants
+    userID INT PRIMARY KEY AUTO_INCREMENT,                                   
+    name VARCHAR(255) NOT NULL,                            
+    Email VARCHAR(255) UNIQUE NOT NULL,                          
+    PasswordHash VARCHAR(255) NOT NULL,                                        
+    RollNo VARCHAR(50) UNIQUE NOT NULL,                                     
+    Department VARCHAR(100),                           
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,                             
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP                                 
+
+Team Event
+    TeamID INT PRIMARY KEY AUTO_INCREMENT,                                  
+    RollNo VARCHAR(50) NOT NULL,                             
+    TeamName VARCHAR(50) NOT NULL,                                  
+    PhoneNumber VARCHAR(15) CHECK (PhoneNumber REGEXP '^[0-9]+$'),                        
+    Department VARCHAR(100),                                   
+    Email VARCHAR(255) UNIQUE,                                      
+    TeamLead BOOLEAN DEFAULT FALSE,                                                  
+    EventID INT NOT NULL,
+    FOREIGN KEY (RollNo) REFERENCES Participants(RollNo) ON DELETE CASCADE,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID) ON DELETE CASCADE
+
+Solo Event
+    SoloEventID INT PRIMARY KEY AUTO_INCREMENT,
+    RollNo VARCHAR(50) NOT NULL,   
+    EventID INT NOT NULL,    
+    RegistrationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (RollNo) REFERENCES Participants(RollNo) ON DELETE CASCADE,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID) ON DELETE CASCADE
+
+Registrations
+    RegistrationID INT PRIMARY KEY AUTO_INCREMENT,
+    RollNo VARCHAR(50) NOT NULL,   
+    EventID INT NOT NULL,  
+    TeamID INT NULL,  
+    SoloEventID INT NULL,  
+    RegistrationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (RollNo) REFERENCES Participants(RollNo) ON DELETE CASCADE,
+    FOREIGN KEY (EventID) REFERENCES Events(EventID) ON DELETE CASCADE,
+    FOREIGN KEY (TeamID) REFERENCES TeamEvents(TeamID) ON DELETE SET NULL,
+    FOREIGN KEY (SoloEventID) REFERENCES SoloEvents(SoloEventID) ON DELETE SET NULL
